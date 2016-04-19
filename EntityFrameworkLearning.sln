@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkLearning", "EntityFrameworkLearning\EntityFrameworkLearning.csproj", "{5A5D71EC-F81F-40C6-88B8-85B876BED496}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkLearning.Tests", "EntityFrameworkLearning.Tests\EntityFrameworkLearning.Tests.csproj", "{9B234D5A-734D-4386-9BF8-749C1CEC448F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A5D71EC-F81F-40C6-88B8-85B876BED496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A5D71EC-F81F-40C6-88B8-85B876BED496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A5D71EC-F81F-40C6-88B8-85B876BED496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A5D71EC-F81F-40C6-88B8-85B876BED496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B234D5A-734D-4386-9BF8-749C1CEC448F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B234D5A-734D-4386-9BF8-749C1CEC448F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B234D5A-734D-4386-9BF8-749C1CEC448F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B234D5A-734D-4386-9BF8-749C1CEC448F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
