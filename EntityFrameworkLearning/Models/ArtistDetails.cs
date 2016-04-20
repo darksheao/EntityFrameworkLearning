@@ -13,6 +13,9 @@ namespace EntityFrameworkLearning.Models
         [ForeignKey("Artist")]
         public int ArtistID { get; set; }
         public string Bio { get; set; }
+        [Timestamp()]
+        public byte[] RowVersion { get; set; }
+
         public virtual Artist Artist { get; set; }
     }
 }

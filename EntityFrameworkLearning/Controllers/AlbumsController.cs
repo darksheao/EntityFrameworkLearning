@@ -17,7 +17,8 @@ namespace EntityFrameworkLearning.Controllers
         // GET: Albums
         public ActionResult Index()
         {
-            return View(db.Albums.ToList());
+            var albums = db.Albums.Include(a => a.Artist);
+            return View(albums.ToList());
         }
 
         // GET: Albums/Details/5
@@ -38,6 +39,7 @@ namespace EntityFrameworkLearning.Controllers
         // GET: Albums/Create
         public ActionResult Create()
         {
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace EntityFrameworkLearning.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AlbumID,Title,Price")] Album album)
+        public ActionResult Create([Bind(Include = "AlbumID,Title,Price,ArtistID,RowVersion")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace EntityFrameworkLearning.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
             return View(album);
         }
 
@@ -70,6 +73,7 @@ namespace EntityFrameworkLearning.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
             return View(album);
         }
 
@@ -78,7 +82,7 @@ namespace EntityFrameworkLearning.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,Title,Price")] Album album)
+        public ActionResult Edit([Bind(Include = "AlbumID,Title,Price,ArtistID,RowVersion")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace EntityFrameworkLearning.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
             return View(album);
         }
 

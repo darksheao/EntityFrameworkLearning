@@ -15,6 +15,8 @@ namespace EntityFrameworkLearning.Models
         public string Title { get; set; }
         public decimal Price { get; set; }
         public int ArtistID { get; set; }
+        [Timestamp()]
+        public byte[] RowVersion { get; set; }
 
         public virtual Artist Artist { get; set; }
         public virtual List<Reviewer> Reviewers { get; set; }

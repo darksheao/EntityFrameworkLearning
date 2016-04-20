@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.ArtistDetails.Bio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtistDetails.Bio)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -18,15 +26,16 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+
     </dl>
 </div>
-<h2>Albums</h2>
-<ul>
-    @foreach (var album in Model.Albums)
-    {
-        <li>@album.Title</li>
-    }
-</ul>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |
     @Html.ActionLink("Back to List", "Index")

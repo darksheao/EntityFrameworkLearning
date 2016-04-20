@@ -27,6 +27,14 @@ namespace EntityFrameworkLearning.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.Artists.AddOrUpdate(new Models.Artist() { Name = "Band", Albums = new System.Collections.Generic.List<Models.Album>() { new Models.Album() { Title = "Album", Price = 9.99m }, new Models.Album() { Title = "Single", Price = 5.99m } } });
+
+            context.Artists.AddOrUpdate(new Models.Artist() { Name = "Pop Band", Albums = new System.Collections.Generic.List<Models.Album>() { new Models.Album() { Title = "One Hit Wonder", Price = 9.99m } } });
+
+            context.Artists.AddOrUpdate(new Models.SoloArtist() { Name = "Jeff Solo", Instrumnet = "Guitar", Albums = new System.Collections.Generic.List<Models.Album>() { new Models.Album() { Title = "Solo Guitar", Price = 7.99m }, new Models.Album() { Title = "Single Guitar", Price = 7.99m } } });
+
+            context.SaveChanges();
         }
     }
 }

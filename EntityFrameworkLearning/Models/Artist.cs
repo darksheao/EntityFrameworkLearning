@@ -13,6 +13,8 @@ namespace EntityFrameworkLearning.Models
         [Required]
         [StringLength(100, MinimumLength = 2)]
         public string Name { get; set; }
+        [Timestamp()]
+        public byte[] RowVersion { get; set; }
 
         public virtual List<Album> Albums { get; set; }
         public virtual ArtistDetails ArtistDetails { get; set; }
