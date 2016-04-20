@@ -7,18 +7,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EntityFrameworkLearning.Models;
+using EntityFrameworkLearning.Models.Repositories;
 
 namespace EntityFrameworkLearning.Controllers
 {
     public class AlbumsController : Controller
     {
-        private MusicStoreContext db = new MusicStoreContext();
+        //private MusicStoreContext db = new MusicStoreContext();
+        private AlbumRepository repo = new AlbumRepository();
+        private ArtistRepository artistrepo = new ArtistRepository();
 
         // GET: Albums
         public ActionResult Index()
         {
-            var albums = db.Albums.Include(a => a.Artist);
-            return View(albums.ToList());
+            return View(repo.GetAll());
         }
 
         // GET: Albums/Details/5
@@ -28,7 +30,7 @@ namespace EntityFrameworkLearning.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = repo.Get(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -39,7 +41,7 @@ namespace EntityFrameworkLearning.Controllers
         // GET: Albums/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name");
+            ViewBag.ArtistID = new SelectList(artistrepo.GetAll(), "ArtistID", "Name");
             return View();
         }
 
@@ -52,12 +54,12 @@ namespace EntityFrameworkLearning.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Albums.Add(album);
-                db.SaveChanges();
+                repo.Add(album);
+                repo.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
+            ViewBag.ArtistID = new SelectList(artistrepo.GetAll(), "ArtistID", "Name", album.ArtistID);
             return View(album);
         }
 
@@ -68,12 +70,12 @@ namespace EntityFrameworkLearning.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = repo.Get(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
+            ViewBag.ArtistID = new SelectList(artistrepo.GetAll(), "ArtistID", "Name", album.ArtistID);
             return View(album);
         }
 
@@ -86,11 +88,11 @@ namespace EntityFrameworkLearning.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.Entry(album).State = EntityState.Modified;
+                repo.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
+            ViewBag.ArtistID = new SelectList(artistrepo.GetAll(), "ArtistID", "Name", album.ArtistID);
             return View(album);
         }
 
@@ -101,7 +103,7 @@ namespace EntityFrameworkLearning.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = repo.Get(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -114,9 +116,9 @@ namespace EntityFrameworkLearning.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albums.Find(id);
-            db.Albums.Remove(album);
-            db.SaveChanges();
+            Album album = repo.Get(id);
+            repo.Remove(album);
+            repo.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -124,7 +126,7 @@ namespace EntityFrameworkLearning.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                repo.Dispose();
             }
             base.Dispose(disposing);
         }

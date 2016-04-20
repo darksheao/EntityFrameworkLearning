@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -35,6 +36,21 @@ namespace EntityFrameworkLearning.Models.Repositories
         public void SaveChanges()
         {
             context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
+        }
+
+        public DbEntityEntry Entry(T entry)
+        {
+            return context.Entry<T>(entry);
+        }
+
+        public void Remove(T entry)
+        {
+            DbSet.Remove(entry);
         }
     }
 }
